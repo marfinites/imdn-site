@@ -1,0 +1,27 @@
+services:
+  imdn-site:
+    image: nginx:alpine
+    container_name: imdn-site
+    restart: unless-stopped
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    networks:
+      - coolify
+    labels:
+      - "traefik.enable=true"
+      # HTTPS
+      - "traefik.http.routers.imdn.rule=Host(`imdn.pt`)"
+      - "traefik.http.routers.imdn.entrypoints=https"
+      - "traefik.http.routers.imdn.tls=true"
+      - "traefik.http.routers.imdn.tls.certresolver=letsencrypt"
+      - "traefik.http.services.imdn.loadbalancer.server.port=80"
+      # HTTP redirect
+      - "traefik.http.routers.imdn-http.rule=Host(`imdn.pt`)"
+      - "traefik.http.routers.imdn-http.entrypoints=http"
+      - "traefik.http.routers.imdn-http.middlewares=imdn-redirect"
+      - "traefik.http.middlewares.imdn-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.imdn-redirect.redirectscheme.permanent=true"
+
+networks:
+  coolify:
+    external: true

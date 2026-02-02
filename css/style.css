@@ -3,12 +3,13 @@
    =========================================== */
 
 :root {
-    --color-primary: #0f172a;
-    --color-secondary: #3b82f6;
+    --color-primary: #1a1a1a;
+    --color-secondary: #b8965a;
+    --color-gold: #b8965a;
     --color-text: #334155;
     --color-text-light: #64748b;
     --color-bg: #ffffff;
-    --color-bg-subtle: #f8fafc;
+    --color-bg-subtle: #faf9f7;
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -80,7 +81,7 @@ h1 {
 
 h1 span {
     font-weight: 600;
-    color: var(--color-secondary);
+    color: var(--color-gold);
 }
 
 .subtitle {
